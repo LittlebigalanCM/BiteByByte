@@ -1,0 +1,40 @@
+﻿@page
+@model DeleteModel
+
+<form method="post">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
+                <h2 class="text-danger">Delete Food Type</h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="objFoodType.Name"></label>
+                    </div>
+                    <div class="col-9">
+                        <input readonly class="form-control" asp-for="objFoodType.Name" />
+                        <span class="text-danger" asp-validation-for="objFoodType.Name"></span>
+                    </div>
+                    @if (Model.objFoodType.Id != 0)
+                    {
+                        <input type="hidden" asp-for="objFoodType.Id" />
+                    }
+                </div>
+                <div class="form-group row pt-3">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-danger form-control">Delete</button>
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
