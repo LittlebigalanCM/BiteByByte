@@ -32,24 +32,45 @@ namespace BB.Infrastructure.Data.DbInitializer
 
             }
 
-            if (_db.Categories.Any())
+            if (!_db.Categories.Any())
             {
-                return; //DB has been seeded
+
+                var Categories = new List<Category>
+                {
+                    new Category { Name = "Soup", DisplayOrder = 1 },
+                    new Category { Name = "Salad", DisplayOrder = 2 },
+                    new Category { Name = "Sandwiches", DisplayOrder = 3 }
+                };
+
+                foreach (var c in Categories)
+                {
+                    _db.Categories.Add(c);
+                }
+                _db.SaveChanges();
             }
 
-            var Categories = new List<Category>
+            if (!_db.FoodTypes.Any())
             {
+                var FoodTypes = new List<FoodType>
+                {
+                    new FoodType { Name = "Vegetarian" },
+                    new FoodType { Name = "Vegan" },
+                    new FoodType { Name = "Gluten-Free" },
+                    new FoodType { Name = "Dairy-Free" },
+                    new FoodType { Name = "Nut-Free" },
+                    new FoodType { Name = "Halal" },
+                    new FoodType { Name = "Kosher" },
+                    new FoodType { Name = "Spicy" },
+                    new FoodType { Name = "Low-Carb" },
+                    new FoodType { Name = "High-Protein" }
+                };
 
-            new Category { Name = "Soup", DisplayOrder = 1 },
-            new Category { Name = "Salad", DisplayOrder = 2 },
-            new Category { Name = "Sandwiches", DisplayOrder = 3 }
-            };
-
-            foreach (var c in Categories)
-            {
-                _db.Categories.Add(c);
+                foreach (var ft in FoodTypes)
+                {
+                    _db.FoodTypes.Add(ft);
+                }
+                _db.SaveChanges();
             }
-            _db.SaveChanges();
         }
     }
 }
