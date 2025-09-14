@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BB.Application\BB.Application.csproj" />
     <ProjectReference Include="..\BB.Core\BB.Core.csproj" />
   </ItemGroup>
 

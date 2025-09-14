@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BB.Core\BB.Core.csproj" />
+	<ProjectReference Include="..\BB.Infrastructure\BB.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
