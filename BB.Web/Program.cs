@@ -1,3 +1,5 @@
+using BB.Application;
+using BB.Core.Interfaces;
 using BB.Infrastructure.Data;
 using BB.Infrastructure.Data.DbInitializer;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddScoped<DbInitializer>();
+builder.Services.AddScoped<UnitOfWork>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
