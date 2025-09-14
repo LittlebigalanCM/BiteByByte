@@ -1,4 +1,4 @@
-﻿using BB.Application.Interfaces;
+﻿using BB.Core.Interfaces;
 using BB.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
