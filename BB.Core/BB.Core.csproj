@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Interfaces\IUnitOfWork.cs" />
+  </ItemGroup>
+
 </Project>

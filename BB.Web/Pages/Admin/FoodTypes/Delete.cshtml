@@ -11,15 +11,15 @@
             <div class="col-8 pt-3">
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="objFoodType.Name"></label>
+                        <label asp-for="ObjFoodType.Name"></label>
                     </div>
                     <div class="col-9">
-                        <input readonly class="form-control" asp-for="objFoodType.Name" />
-                        <span class="text-danger" asp-validation-for="objFoodType.Name"></span>
+                        <input readonly class="form-control" asp-for="ObjFoodType.Name" />
+                        <span class="text-danger" asp-validation-for="ObjFoodType.Name"></span>
                     </div>
-                    @if (Model.objFoodType.Id != 0)
+                    @if (Model.ObjFoodType.Id != 0)
                     {
-                        <input type="hidden" asp-for="objFoodType.Id" />
+                        <input type="hidden" asp-for="ObjFoodType.Id" />
                     }
                 </div>
                 <div class="form-group row pt-3">

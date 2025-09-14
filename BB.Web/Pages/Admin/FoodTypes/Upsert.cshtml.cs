@@ -1,3 +1,4 @@
+using BB.Application;
 using BB.Core.Models;
 using BB.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -7,25 +8,24 @@ namespace BB.Web.Pages.Admin.FoodTypes
 {
     public class UpsertModel : PageModel
     {
-        private readonly ApplicationDbContext _db;
+        private readonly UnitOfWork _UnitOfWork;
 
         [BindProperty]
-        public FoodType objFoodType { get; set; }
+        public FoodType ObjFoodType { get; set; } = new FoodType();
 
-        public UpsertModel(ApplicationDbContext db)
+        public UpsertModel(UnitOfWork UnitOfWork)
         {
-            _db = db;
-            objFoodType = new FoodType();
+            _UnitOfWork = UnitOfWork;
         }
 
         public IActionResult OnGet(int? id)
         {
             if (id != null && id != 0)
             {
-                objFoodType = _db.FoodTypes.FirstOrDefault(c => c.Id == id) ?? new FoodType();
+                ObjFoodType = _UnitOfWork.FoodType.GetById(id) ?? new FoodType();
             }
 
-            if (objFoodType == null)
+            if (ObjFoodType == null)
             {
                 return NotFound();
             }
@@ -40,15 +40,14 @@ namespace BB.Web.Pages.Admin.FoodTypes
             {
                 return Page();
             }
-            if (objFoodType.Id == 0)
+            if (ObjFoodType.Id == 0)
             {
-                _db.FoodTypes.Add(objFoodType);
+                _UnitOfWork.FoodType.Add(ObjFoodType);
             }
             else
             {
-                _db.FoodTypes.Update(objFoodType);
+                _UnitOfWork.FoodType.Update(ObjFoodType);
             }
-            _db.SaveChanges();
             return RedirectToPage("./Index");
         }
     }

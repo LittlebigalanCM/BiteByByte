@@ -1,4 +1,5 @@
 using BB.Core.Models;
+using BB.Application;
 using BB.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,19 +8,19 @@ namespace BB.Web.Pages.Admin.Categories
     public class IndexModel : PageModel
     {
 
-        private readonly ApplicationDbContext _db;  //local instance of the database service
+        private readonly UnitOfWork _UnitOfWork;  //access to Generic Repository via UnitOfWork
 
-        public List<Category> objCategoryList;  //our UI front end will support looping through and displaying Categories retrieved from the database and stored in a List
+        public List<Category> ObjCategoryList { get; set; } = [];  //our UI front end will support looping through and displaying Categories retrieved from the database and stored in a List
 
-        public IndexModel(ApplicationDbContext db)  //dependency injection of the database service
+        public IndexModel(UnitOfWork UnitOfWork)  //dependency injection of the database service
         {
-            _db = db;
-            objCategoryList = new List<Category>();
+            _UnitOfWork = UnitOfWork;
+            ObjCategoryList = new List<Category>();
         }
 
         public IActionResult OnGet()
         {
-            objCategoryList = _db.Categories.ToList();
+            ObjCategoryList = [.. _UnitOfWork.Category.GetAll()]; //retrieve all Categories from the database via the Generic Repository
             return Page();
         }
     }
