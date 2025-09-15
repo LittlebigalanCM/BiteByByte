@@ -1,9 +1,7 @@
-using BB.Core.Models;
-using BB.Application;
-using BB.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-namespace BB.Web.Pages.Admin.Categories
+
+namespace BB.Web.Pages.Admin.MenuItems
 {
     public class IndexModel : PageModel
     {

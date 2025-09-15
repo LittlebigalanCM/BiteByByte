@@ -1,0 +1,138 @@
+﻿@page
+@model BB.Web.Pages.Admin.MenuItems.UpsertModel
+@{
+}
+<form method="post" onsubmit="return ValidateInput()" asp_action="Upsert" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+                <h2 class="text-primary">
+                    @(Model.ObjMenuItem.Id == 0 ? "Create " : "Update ")Menu Item
+                </h2>
+            </div>
+            <div class="col-8 pt-3">
+                <div class="form-group row pt-3">
+                    <div class="col-3">
+                        <label asp-for="ObjMenuItem.Name"></label>
+                    </div>
+                    <div class="col-9">
+                        <input id="txtName" class="form-control" asp-for="ObjMenuItem.Name" />
+                        <span class="text-danger" asp-validation-for="ObjMenuItem.Name"></span>
+                    </div>
+                    @if(Model.ObjMenuItem.Id != 0)
+                    {
+                        <input type="hidden" asp-for="ObjMenuItem.Id" />
+                    }
+                </div>
+                <div class="form-group row pt-3">
+                    <div class="col-3">
+                        <label asp-for="ObjMenuItem.Price"></label>
+                    </div>
+                    <div class="col-9">
+                        <input id="txtPrice" class="form-control" asp-for="ObjMenuItem.Price" />
+                        <span class="text-danger" asp-validation-for="ObjMenuItem.Price"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="ObjMenuItem.Description"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea id="txtDescription" class="form-control" style="height:200px;" asp-for="ObjMenuItem.Description"></textarea>
+                        <span class="text-danger" asp-validation-for="ObjMenuItem.Description"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="ObjMenuItem.Image"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="file" id="uploadImgBox" class="form-control" asp-for="ObjMenuItem.Image" />
+                        <span class="text-danger" asp-validation-for="ObjMenuItem.Image"></span>
+                    </div>
+                </div>
+                <div class="form-group row pt-3">
+                    <div class="col-3">
+                        <label asp-for="ObjMenuItem.CategoryId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.ObjMenuItem.CategoryId, Model.CategoryList, "-Please select a Category-", new { @class = "form-control", @id="ddlCategory"})
+                    </div>
+                    <span class="text-danger" asp-validation-for="ObjMenuItem.Category.Id"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="ObjMenuItem.FoodTypeId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.ObjMenuItem.FoodTypeId, Model.FoodTypeList, "-Please select a Food Type-", new { @class = "form-control", @id = "ddlFoodType" })
+                    </div>
+                    <span class="text-danger" asp-validation-for="ObjMenuItem.FoodType.Id"></span>
+                </div>
+                <div class="form-group row pt-3">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary form-control">
+                                    @(Model.ObjMenuItem.Id == 0 ? "Create " : "Update ")Menu Item
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 p-4">
+                <img src="@Model.ObjMenuItem.Image" style="border-radius:5px; border: 1px solid #bbb9b9; width:100%" />
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+
+        function ValidateInput() {
+        if (document.getElementById('txtName').value == "") {
+            Swal.fire('Error', 'Please Enter a Product Name', 'error');
+            return false;
+        }
+
+        if ($('#txtPrice').val() < .01) {
+            Swal.fire('Error', 'Please Enter a Unit Price Greater Than $.01', 'error');
+            return false;
+        }
+
+        if (tinyMCE.get('txtDescription').getContent() == "") {
+            Swal.fire('Error', 'Please Enter a Product Description', 'error');
+            return false;
+        }
+
+        if (document.getElementById("uploadImgBox").value == "") {
+            Swal.fire('Error', 'Please Select an Image', 'error')
+            return false
+        }
+
+        if ($('#ddlCategory').prop('selectedIndex') === 0) {
+            Swal.fire('Error', 'Please Select a Category', 'error');
+            return false;
+        }
+
+        if ($('#ddlFoodType').prop('selectedIndex') === 0) {
+            Swal.fire('Error', 'Please Select FoodType', 'error');
+            return false;
+        }
+
+            return true;
+        }
+    </script>
+}
