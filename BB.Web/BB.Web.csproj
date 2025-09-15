@@ -20,4 +20,8 @@
     <ProjectReference Include="..\BB.Infrastructure\BB.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\menuitems\" />
+  </ItemGroup>
+
 </Project>

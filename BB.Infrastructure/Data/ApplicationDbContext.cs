@@ -8,6 +8,7 @@ namespace BB.Infrastructure.Data
     {
         public DbSet<Category> Categories { get; set; }  //the physical DB table will be named Categories
         public DbSet<FoodType> FoodTypes { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

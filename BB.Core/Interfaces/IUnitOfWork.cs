@@ -12,5 +12,6 @@ namespace BB.Core.Interfaces
         //Add Models/Tables here as you create them, so UnitOfWork have access
         public IGenericRepository<Category> Category { get; }
         public IGenericRepository<FoodType> FoodType { get; }
+        public IGenericRepository<MenuItem> MenuItem { get; }
     }
 }
