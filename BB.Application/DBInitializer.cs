@@ -2,7 +2,7 @@
 using BB.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BB.Infrastructure.Data.DbInitializer
+namespace BB.Application
 
 {
     public class DbInitializer : IDbInitializer

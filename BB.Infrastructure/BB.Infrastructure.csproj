@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BB.Core\BB.Core.csproj" />
+	  <ProjectReference Include="..\BB.Application\BB.Application.csproj" />
   </ItemGroup>
 
 </Project>

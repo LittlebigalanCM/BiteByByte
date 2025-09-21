@@ -1,6 +1,6 @@
 ﻿using BB.Core.Interfaces;
 using BB.Core.Models;
-using BB.Infrastructure.Data;
+using BB.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;

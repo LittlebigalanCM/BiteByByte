@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BB.Infrastructure.Data
+namespace BB.Application
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

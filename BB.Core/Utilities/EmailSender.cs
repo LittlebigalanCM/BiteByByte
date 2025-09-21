@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BB.Application.Utilities
+namespace BB.Core.Utilities
 {
     public class EmailSender : IEmailSender
     {

@@ -8,13 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.13.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="MimeKit" Version="4.13.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BB.Core\BB.Core.csproj" />
-	<ProjectReference Include="..\BB.Infrastructure\BB.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

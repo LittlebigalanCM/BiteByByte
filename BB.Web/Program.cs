@@ -1,9 +1,11 @@
 using BB.Application;
 using BB.Core.Interfaces;
 using BB.Infrastructure.Data;
-using BB.Infrastructure.Data.DbInitializer;
+using BB.Application;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BB.Core.Utilities;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddScoped<DbInitializer>();
 builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
