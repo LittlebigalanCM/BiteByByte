@@ -1,6 +1,6 @@
 ﻿using BB.Core.Interfaces;
 using BB.Core.Models;
-using BB.Infrastructure.Data;
+using BB.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,7 @@ namespace BB.Application
         private IGenericRepository<Category>? _Category;
         private IGenericRepository<FoodType>? _FoodType;
         private IGenericRepository<MenuItem>? _MenuItem;
+        private IGenericRepository<ApplicationUser>? _ApplicationUser;
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -45,6 +46,15 @@ namespace BB.Application
             {
                 _MenuItem ??= new GenericRepository<MenuItem>(_db);
                 return _MenuItem;
+            }
+        }
+
+        public IGenericRepository<ApplicationUser> ApplicationUser
+        {
+            get
+            {
+                _ApplicationUser ??= new GenericRepository<ApplicationUser>(_db);
+                return _ApplicationUser;
             }
         }
     }

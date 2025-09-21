@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using BB.Core.Interfaces;
-using BB.Infrastructure.Data;
+using BB.Application;
 
 namespace BB.Application
 {
