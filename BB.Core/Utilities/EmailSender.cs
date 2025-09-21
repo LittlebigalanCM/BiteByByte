@@ -19,7 +19,7 @@ namespace BB.Core.Utilities
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             var emailToSend = new MimeMessage();
-            emailToSend.From.Add(MailboxAddress.Parse("cmartinwebersmtp@gmail.com"));
+            emailToSend.From.Add(new MailboxAddress("Bite By Byte", "cmartinwebersmtp@gmail.com"));
             emailToSend.To.Add(MailboxAddress.Parse(email));
             emailToSend.Subject = subject;
             emailToSend.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlMessage };
