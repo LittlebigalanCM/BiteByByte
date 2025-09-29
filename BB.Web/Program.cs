@@ -4,6 +4,7 @@ using BB.Core.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,14 @@ builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddRazorPages();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 var app = builder.Build();
 
@@ -39,7 +47,8 @@ else
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+app.UseSession();
 app.UseAuthorization();
 
 app.MapStaticAssets();

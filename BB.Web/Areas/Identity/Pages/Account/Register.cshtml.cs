@@ -1,5 +1,6 @@
 ﻿using BB.Application;
 using BB.Core.Models;
+using BB.Core.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -118,11 +119,11 @@ namespace BB.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             // Retrieve the role from the form
-            string role = Request.Form["rdUserRole"].ToString();
-            if (string.IsNullOrEmpty(role))
-            {
-                role = SD.CustomerRole; // Make the default login Customer
-            }
+            //string role = Request.Form["rdUserRole"].ToString();
+            //if (string.IsNullOrEmpty(role))
+            //{
+            //    role = SD.CustomerRole; // Make the default login Customer
+            //}
             returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
@@ -140,10 +141,18 @@ namespace BB.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     var selectedRoles = Request.Form["roles"].ToList();
-                    for (int i = 0; i < selectedRoles.Count; i++)
+                    if (selectedRoles == null || selectedRoles.Count == 0)
                     {
-                        string? userRole = selectedRoles[i];
+                        string? userRole = SD.CustomerRole;
                         await _userManager.AddToRoleAsync(user, userRole);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < selectedRoles.Count; i++)
+                        {
+                            string? userRole = selectedRoles[i];
+                            await _userManager.AddToRoleAsync(user, userRole);
+                        }
                     }
 
                     _logger.LogInformation("User created a new account with password.");
