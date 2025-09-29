@@ -1,7 +1,9 @@
 ﻿using BB.Core.Interfaces;
 using BB.Core.Models;
+using BB.Application;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BB.Core.Utilities;
 
 namespace BB.Application
 

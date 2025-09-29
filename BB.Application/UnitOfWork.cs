@@ -16,6 +16,9 @@ namespace BB.Application
         private IGenericRepository<FoodType>? _FoodType;
         private IGenericRepository<MenuItem>? _MenuItem;
         private IGenericRepository<ApplicationUser>? _ApplicationUser;
+        private IGenericRepository<ShoppingCart>? _ShoppingCart;
+        public IGenericRepository<OrderHeader>? _OrderHeader;
+        public IGenericRepository<OrderDetails>? _OrderDetails;
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -55,6 +58,33 @@ namespace BB.Application
             {
                 _ApplicationUser ??= new GenericRepository<ApplicationUser>(_db);
                 return _ApplicationUser;
+            }
+        }
+
+        public IGenericRepository<ShoppingCart> ShoppingCart
+        {
+            get
+            {
+                _ShoppingCart ??= new GenericRepository<ShoppingCart>(_db);
+                return _ShoppingCart;
+            }
+        }
+
+        public IGenericRepository<OrderHeader> OrderHeader
+        {
+            get
+            {
+                _OrderHeader ??= new GenericRepository<OrderHeader>(_db);
+                return _OrderHeader;
+            }
+        }
+
+        public IGenericRepository<OrderDetails> OrderDetails
+        {
+            get
+            {
+                _OrderDetails ??= new GenericRepository<OrderDetails>(_db);
+                return _OrderDetails;
             }
         }
     }
